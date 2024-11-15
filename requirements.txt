@@ -1,4 +1,6 @@
-flask==2.0.3
-pandas==1.3.5
-openpyxl==3.0.9
-gunicorn==20.1.0
+flask
+pandas
+openpyxl
+gunicorn
+Werkzeug
+numpy==1.26.4

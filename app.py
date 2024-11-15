@@ -1,13 +1,16 @@
 from flask import Flask, request, jsonify
 import pandas as pd
+import pprint
 
 # Initialiser l'application Flask
 app = Flask(__name__)
 
 # Charger les fichiers de données au démarrage de l'application
-names_df = pd.read_excel('esrs_data/ESRS_NAMES_EN-FR.xlsx')
-acronyms_df = pd.read_excel('esrs_data/ESRS_ACRONYMS_EN-FR.xlsx')
-corpus_df = pd.read_csv('esrs_data/CORPUS_ESRS_EN_FR.csv')
+names_df = pd.read_excel('ESRS_NAMES_EN-FR.xlsx')
+acronyms_df = pd.read_excel('ESRS_ACRONYMS_EN-FR.xlsx')
+corpus_df = pd.read_excel('CORPUS_ESRS_EN_FR - GIT.xlsx')
+
+pprint.pprint(corpus_df)
 
 # Créer des dictionnaires de traduction
 names_dict = dict(zip(names_df['EN'], names_df['FR']))
