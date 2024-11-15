@@ -17,7 +17,7 @@ acronyms_dict = dict(zip(acronyms_df['EN'], acronyms_df['FR']))
 corpus_dict = dict(zip(corpus_df['EN'], corpus_df['FR']))
 glossary_dict = dict(zip(glossary_df['EN'], glossary_df['FR']))
 
-pprint.pprint(names_dict)
+pprint.pprint(glossary_dict)
 
 # Fonction de traduction
 def preprocess_text(text):
@@ -37,6 +37,19 @@ def translate():
     sentence = data.get("sentence", "")
     translated_text = translate_sentence(sentence)
     return jsonify({"translated_text": translated_text})
+
+@app.route('/context', methods=['POST'])
+def find_context():
+    data = request.get_json()
+    word = data.get("word", "")
+    corpus = {key:value for (key,value) in corpus_dict.items() if word.lower() in key.lower() }
+    glossary = {key:value for (key,value) in glossary_dict.items() if key is type(key) == str and word.lower() in key.lower() }
+    return jsonify(
+        size= len(corpus),
+        corpus= corpus,
+        glossary= glossary
+    )
+
 
 if __name__ == '__main__':
     app.run(debug=True)
